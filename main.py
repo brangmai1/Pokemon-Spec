@@ -151,9 +151,10 @@ def battle(player1, player2):
     print(f"Player two: {player2}")
 
 
-def game_on(row, col, grid):
-    grid.set_player_position(row, col)
+def game_on(row_num, col_num, grid):
+    grid.set_player_position(row_num, col_num)
     grid.battle_ground()
+
 
 def ask_direction(condition):
     if not condition:
@@ -161,17 +162,12 @@ def ask_direction(condition):
     else:
         print("The chosen path is blocked. Choose a different direction.")
     print("L/R/U/D for left/right/up/down or 'e' to exit.")
-    # print("'l' for left\t'r' for right\n'u' for up\t\t'd' for down")
-    # print("'e' for exit")
     chosen_direction = input("Enter your choice: ")
     return chosen_direction.lower()
 
 
 game_initialization()
-
 repeat_game = True
-
-#while repeat_game:
 pokemon_list()
 
 my_pokemon = Pokemon()
