@@ -29,7 +29,6 @@ class Player:
         self.name = name
         self.gender = gender
         self.nature = nature
-        self.pokemon_list = pokemon_list
         self.bag = bag
         self.money = money
 
@@ -41,8 +40,10 @@ class Player:
 
 
 class Pokemon:
-    # Pokemons and their characteristic are taken
-    # from the website: https://www.thetrueindians.com/animation/list-of-all-pokemon-characters/
+
+    #Pokemons and their characteristic are taken
+    #from the website: https://www.thetrueindians.com/animation/list-of-all-pokemon-characters/
+
     pokemon_bag = [
         {"name": "Pikachu", "type": "Electric", "gender": "Male", "ability": "Static", "move": "Run", "health": 100},
         {"name": "Raichu", "type": "Electric", "gender": "Male", "ability": "Static", "move": "Fly", "health": 100},
@@ -145,9 +146,9 @@ def game_initialization():
     active_players = ActivePlayers()
     active_players.players.append(player_one)
 
-    second_player = str(random.randint(1, 10))
+    second_player = str(random.randint(1, 9))
     while second_player == first_player:
-        second_player = str(random.randint(1, 10))
+        second_player = str(random.randint(1, 9))
     player_two = Player(second_player)
     active_players.players.append(player_two)
     print("\nWelcome to Pokemon world!!\n")
@@ -181,82 +182,75 @@ def ask_direction(condition):
     return chosen_direction.lower()
 
 
-game_initialization()
-repeat_game = True
-pokemon_list()
+def navigate_grid():
+    row, col = 2, 2
+    player_position = [row, col]
+    my_grid = GridTiles()
+    game_on(player_position[0], player_position[1], my_grid)
 
-my_pokemon = Pokemon()
-your_pokemon_index = int(input("Enter your choice of pokemon number: ")) - 1
-print(your_pokemon_index)
-my_current_pokemon = my_pokemon.get_pokemon(your_pokemon_index)
-print(f"\nStatus of your pokemon")
-print('************************\n')
-my_pokemon.check_pokemon_status(your_pokemon_index)
-
-opponent_pokemon = Pokemon()
-opponent_pokemon_index = random.randint(0, opponent_pokemon.total_pokemon())
-print(opponent_pokemon_index)
-opponent_current_pokemon = opponent_pokemon.get_pokemon(opponent_pokemon_index)
-print(f"\nStatus of your opponant's pokemon")
-print('**************************************\n')
-opponent_pokemon.check_pokemon_status(opponent_pokemon_index)
-
-act_players = ActivePlayers()
-# print(f"Active players: {boot_on_the_ground.get_active_players()}")
-# player_one = boot_on_the_ground.players[0]["name"]
-# player_two = boot_on_the_ground.players[1]["name"]
-# battle(player_one, player_two)
-
-# battle_ground = GridTiles()
-# battle_ground.show_battle_ground()
-print("Display Players.")
-act_players.display_players()
-
-row = 2
-col = 2
-player_position = [row, col]
-my_grid = GridTiles()
-game_on(player_position[0], player_position[1], my_grid)
-
-road_blocked = False
-while True:
-    direction = ask_direction(road_blocked)
     road_blocked = False
+    while True:
+        direction = ask_direction(road_blocked)
+        road_blocked = False
+        if direction == 'l':
+            if col - 1 < 0:
+                road_blocked = True
+            else:
+                my_grid.update_position(row, col)
+                col -= 1
+                game_on(row, col, my_grid)
+        elif direction == 'r':
+            if (col + 1) > 9:
+                road_blocked = True
+            else:
+                my_grid.update_position(row, col)
+                col += 1
+                game_on(row, col, my_grid)
+        elif direction == 'u':
+            if (row - 1) < 0:
+                road_blocked = True
+            else:
+                my_grid.update_position(row, col)
+                row -= 1
+                game_on(row, col, my_grid)
+        elif direction == 'd':
+            if (row + 1) > 9:
+                road_blocked = True
+            else:
+                my_grid.update_position(row, col)
+                row += 1
+                game_on(row, col, my_grid)
+        elif direction == 'e':
+            print("Good bye.")
+            break
 
-    if direction == 'l':
-        if col - 1 < 0:
-            road_blocked = True
-        else:
-            my_grid.update_position(row, col)
-            col -= 1
-            game_on(row, col, my_grid)
 
-    elif direction == 'r':
-        if (col + 1) > 9:
-            road_blocked = True
-        else:
-            my_grid.update_position(row, col)
-            col += 1
-            game_on(row, col, my_grid)
+def game_setup():
+    my_pokemon = Pokemon()
+    your_pokemon_index = int(input("Enter your choice of pokemon number: ")) - 1
+    print(your_pokemon_index)
+    my_current_pokemon = my_pokemon.get_pokemon(your_pokemon_index)
+    print(f"\nStatus of your pokemon")
+    print('************************\n')
+    my_pokemon.check_pokemon_status(your_pokemon_index)
 
-    elif direction == 'u':
-        if (row - 1) < 0:
-            road_blocked = True
-        else:
-            my_grid.update_position(row, col)
-            row -= 1
-            game_on(row, col, my_grid)
+    opponent_pokemon = Pokemon()
+    opponent_pokemon_index = random.randint(0, opponent_pokemon.total_pokemon())
+    print(opponent_pokemon_index)
+    opponent_current_pokemon = opponent_pokemon.get_pokemon(opponent_pokemon_index)
+    print(f"\nStatus of your opponant's pokemon")
+    print('**************************************\n')
+    opponent_pokemon.check_pokemon_status(opponent_pokemon_index)
 
-    elif direction == 'd':
-        if (row + 1) > 9:
-            road_blocked = True
-        else:
-            my_grid.update_position(row, col)
-            row += 1
-            game_on(row, col, my_grid)
+    act_players = ActivePlayers()
+    print("Display Players.")
+    act_players.display_players()
 
-    elif direction == 'e':
-        print("Good bye.")
-        break
+
+if __name__ == '__main__':
+    game_initialization()
+    pokemon_list()
+    game_setup()
+    navigate_grid()
 
 print("\n\n")
