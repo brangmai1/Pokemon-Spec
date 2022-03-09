@@ -7,6 +7,12 @@ class ActivePlayers:
     def get_active_players(self):
         return len(self.players)
 
+    def display_players(self):
+        player_id = 0
+        for i in self.players:
+            player_id += 1
+            print(f'Player #{player_id}: {i.name}')
+
     # def check_pokemon_status(self, pokemon_index):
     #     print(f'Name: \t\t{self.players[pokemon_index]["name"]}')
     #     print(f'Type: \t\t{self.players[pokemon_index]["type"]}')
@@ -17,8 +23,9 @@ class ActivePlayers:
 
 
 class Player:
+    pokemon_bag = []
 
-    def __init__(self, name="", gender="None", nature="player", pokemon_list=0, bag=0, money=0.00):
+    def __init__(self, name="", gender="None", nature="player", bag=0, money=0.00):
         self.name = name
         self.gender = gender
         self.nature = nature
@@ -26,11 +33,17 @@ class Player:
         self.bag = bag
         self.money = money
 
+    def add_pokemon(self, pokemon):
+        self.pokemon_bag.append(pokemon)
+
+    def get_total_pokemon(self):
+        return len(self.pokemon_bag)
+
 
 class Pokemon:
     # Pokemons and their characteristic are taken
     # from the website: https://www.thetrueindians.com/animation/list-of-all-pokemon-characters/
-    pokemon_bag = ([
+    pokemon_bag = [
         {"name": "Pikachu", "type": "Electric", "gender": "Male", "ability": "Static", "move": "Run", "health": 100},
         {"name": "Raichu", "type": "Electric", "gender": "Male", "ability": "Static", "move": "Fly", "health": 100},
         {"name": "Nidoran", "type": "Poison", "gender": "Female", "ability": "Poison", "move": "Run", "health": 100},
@@ -47,19 +60,19 @@ class Pokemon:
         {"name": "Mankey", "type": "Fighting", "gender": "Male", "ability": "Vital Spirit", "move": "Fly",
          "health": 100},
         {"name": "Slowpoke", "type": "Water", "gender": "Male", "ability": "Own Tempo", "move": "Run", "health": 100},
-        {"name": "Slowbro", "type": "Water", "gender": "Female", "ability": "Own Tempo", "move": "Run", "health": 100}])
+        {"name": "Slowbro", "type": "Water", "gender": "Female", "ability": "Own Tempo", "move": "Run", "health": 100}]
 
-    # def __init__(self, name, type_of_pokemon, gender, ability, moves, health):
-    #     self.name = name
-    #     self.type_of_pokemon = type_of_pokemon
-    #     self.gender = gender
-    #     self.nature = ability
-    #     self.moves = moves
-    #     self.health = health
+    def __init__(self, name=0, type_of_pokemon="", gender="", ability="", moves="", health=0):
+        self.name = name
+        self.type_of_pokemon = type_of_pokemon
+        self.gender = gender
+        self.nature = ability
+        self.moves = moves
+        self.health = health
 
-    # def add_pokemon(self, name, type_of_pokemon, gender, ability, moves, health):
-    #     new_pokemon = [name, type_of_pokemon, gender, ability, moves, health]
-    #     self.pokemon_bag.append(new_pokemon)
+    def add_pokemon(self, name, type_of_pokemon, gender, ability, moves, health):
+        new_pokemon = [name, type_of_pokemon, gender, ability, moves, health]
+        self.pokemon_bag.append(new_pokemon)
 
     def display_pokemons(self):
         num = 1
@@ -132,7 +145,9 @@ def game_initialization():
     active_players = ActivePlayers()
     active_players.players.append(player_one)
 
-    second_player = str(random.randint(1, 90))
+    second_player = str(random.randint(1, 10))
+    while second_player == first_player:
+        second_player = str(random.randint(1, 10))
     player_two = Player(second_player)
     active_players.players.append(player_two)
     print("\nWelcome to Pokemon world!!\n")
@@ -171,7 +186,7 @@ repeat_game = True
 pokemon_list()
 
 my_pokemon = Pokemon()
-your_pokemon_index = (int(input("Enter your choice of pokemon number: ")) - 1)
+your_pokemon_index = int(input("Enter your choice of pokemon number: ")) - 1
 print(your_pokemon_index)
 my_current_pokemon = my_pokemon.get_pokemon(your_pokemon_index)
 print(f"\nStatus of your pokemon")
@@ -186,7 +201,7 @@ print(f"\nStatus of your opponant's pokemon")
 print('**************************************\n')
 opponent_pokemon.check_pokemon_status(opponent_pokemon_index)
 
-boot_on_the_ground = ActivePlayers()
+act_players = ActivePlayers()
 # print(f"Active players: {boot_on_the_ground.get_active_players()}")
 # player_one = boot_on_the_ground.players[0]["name"]
 # player_two = boot_on_the_ground.players[1]["name"]
@@ -194,6 +209,8 @@ boot_on_the_ground = ActivePlayers()
 
 # battle_ground = GridTiles()
 # battle_ground.show_battle_ground()
+print("Display Players.")
+act_players.display_players()
 
 row = 2
 col = 2
@@ -243,5 +260,3 @@ while True:
         break
 
 print("\n\n")
-
-
