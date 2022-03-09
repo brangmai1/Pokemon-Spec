@@ -2,12 +2,8 @@
 - [ ] classes:
     - [x] Player
     - [x] Pokemon
-    - [ ] CUP_trainers
-    - [ ] Grid_title
-
-CSCI 39538: Homework 1: Pokemon Spec        Due: 3/01/22
-
-A Pokemon clone created by using Python classes and functions. 
+    - [x] CUP_trainers
+    - [X] Grid_title
 
 The rules of the game are simple, you start off with a starter Pokemon you can choose from a list of Pokemon, and then move through a "map" (more like a grid) in order to collect other Pokemon. The game ends when you either lose a battle or collect 4 different Pokemon (different here means different Pokemon species).
 
@@ -19,16 +15,16 @@ Minimum criteria for this assignment:
 
 You need classes for players, CPU-trainers, Pokemon and grid squares (it might be a good idea to create a grid class as well)
 
-- [ ] For the player:
+- [x] For the player:
     You need attributes/methods for the Pokemon the player owns, the amount of money in the player's possession, the player's bag, the player's name, gender and nature (kind, mean, funny etc)
 
-- [ ] For the Pokemon:
+- [x] For the Pokemon:
     You need attributes/methods for the name, health points, gender, nature and moves the Pokemon can use. Please note that moves might be better made as a class than a dict of move: attack power.
 
-- [ ] For the CPU-trainers:
+- [x] For the CPU-trainers:
     You need attributes/methods for their name, Pokemon they own, the amount of money they award the player upon losing, the Pokemon they gift to the player if any, and a fun fact about them ("Jessica the rich girl fantasizes about ruling her town with an iron fist" for example [I wouldn't want to live in her town lol!])
 
-- [ ] For the grid tiles:
+- [x] For the grid tiles:
     The grid tile you land on should have attributes/methods like the terrain you're on and whatever is on the terrain (if there is something on it, like a CPU-trainer or Pokemon or Pokeball).
 
 - [ ] For the battle sequence:
@@ -48,7 +44,7 @@ You need classes for players, CPU-trainers, Pokemon and grid squares (it might b
 
     The battle loops UNTIL you win, by reducing all opposing Pokemon to zero health, losing by having all of your Pokemon's health go down to zero, or running away.
 
-- [ ] For navigating the grid:
+- [x] For navigating the grid:
     The game starts with you selecting a starter Pokemon, then show a grid on the console to the player and give them the options to go left/right/up/down (maybe by pressing A/D/W/D) if there is a nearby grid square they can hop to.
 
     While the grid doesn't have to be overly complicated, you can do something like write in a zero for an inaccessible spot on the grid, a 1 for an accessible spot, a 2 for an item, a 3 for a Pokemon and a 4 for a CPU-trainer. The actual player can be a number like 5,6,7,8 or 9, and when the player goes to a square, the player is represented by this player number.
