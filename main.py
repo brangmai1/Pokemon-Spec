@@ -13,14 +13,6 @@ class ActivePlayers:
             player_id += 1
             print(f'Player #{player_id}: {i.name}')
 
-    # def check_pokemon_status(self, pokemon_index):
-    #     print(f'Name: \t\t{self.players[pokemon_index]["name"]}')
-    #     print(f'Type: \t\t{self.players[pokemon_index]["type"]}')
-    #     print(f'Gender: \t{self.players[pokemon_index]["gender"]}')
-    #     print(f'Ability: \t{self.players[pokemon_index]["ability"]}')
-    #     print(f'Move: \t\t{self.players[pokemon_index]["move"]}')
-    #     print(f'Health: \t{self.players[pokemon_index]["health"]}')
-
 
 class Player:
     pokemon_bag = []
@@ -43,7 +35,6 @@ class Pokemon:
 
     #Pokemons and their characteristic are taken
     #from the website: https://www.thetrueindians.com/animation/list-of-all-pokemon-characters/
-
     pokemon_bag = [
         {"name": "Pikachu", "type": "Electric", "gender": "Male", "ability": "Static", "move": "Run", "health": 100},
         {"name": "Raichu", "type": "Electric", "gender": "Male", "ability": "Static", "move": "Fly", "health": 100},
@@ -151,6 +142,7 @@ def game_initialization():
         second_player = str(random.randint(1, 9))
     player_two = Player(second_player)
     active_players.players.append(player_two)
+
     print("\nWelcome to Pokemon world!!\n")
     print(f'You are: player {player_one.name}')
     print(f'Your opponent is: player {player_two.name}')
@@ -228,15 +220,14 @@ def navigate_grid():
 def game_setup():
     my_pokemon = Pokemon()
     your_pokemon_index = int(input("Enter your choice of pokemon number: ")) - 1
-    print(your_pokemon_index)
+
     my_current_pokemon = my_pokemon.get_pokemon(your_pokemon_index)
     print(f"\nStatus of your pokemon")
     print('************************\n')
     my_pokemon.check_pokemon_status(your_pokemon_index)
 
     opponent_pokemon = Pokemon()
-    opponent_pokemon_index = random.randint(0, opponent_pokemon.total_pokemon())
-    print(opponent_pokemon_index)
+    opponent_pokemon_index = random.randint(0, opponent_pokemon.total_pokemon() - 1)
     opponent_current_pokemon = opponent_pokemon.get_pokemon(opponent_pokemon_index)
     print(f"\nStatus of your opponant's pokemon")
     print('**************************************\n')
