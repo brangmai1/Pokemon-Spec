@@ -110,11 +110,14 @@ class GridTiles:
                     self.grid_array[-1].append('_')
 
     def set_player_position(self, x, y):
+        if self.grid_array[x][y] == 'B':
+            print("Great!! You found a Pokeball.")
+            player = Player()
+            player.pokemon_bag.append(1)
+            print(player.get_total_pokemon())
         self.grid_array[x][y] = "X"
 
     def update_position(self, x, y):
-        if self.grid_array[x][y] == 'B':
-            print("Great!! You found a Pokeball.")
         self.grid_array[x][y] = "_"
 
     def get_size(self):
@@ -175,13 +178,18 @@ def ask_direction(condition):
 
 
 def navigate_grid():
-    row, col = 2, 2
+    row = random.randint(0, 10)
+    col = random.randint(0, 10)
     player_position = [row, col]
     my_grid = GridTiles()
     game_on(player_position[0], player_position[1], my_grid)
 
     road_blocked = False
+    current_player = Player()
     while True:
+        if current_player.get_total_pokemon() == 4:
+            print("Congratulation!! YOU WIN!!")
+            break
         direction = ask_direction(road_blocked)
         road_blocked = False
         if direction == 'l':
