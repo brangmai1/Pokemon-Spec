@@ -4,6 +4,9 @@
     - [x] Pokemon
     - [x] CUP_trainers
     - [X] Grid_title
+    
+
+/Users/brangmai/Desktop/Screen Recording 2022-03-10 at 3.03.31 PM.mov
 
 The rules of the game are simple, you start off with a starter Pokemon you can choose from a list of Pokemon, and then move through a "map" (more like a grid) in order to collect other Pokemon. The game ends when you either lose a battle or collect 4 different Pokemon (different here means different Pokemon species).
 
