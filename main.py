@@ -109,13 +109,12 @@ class GridTiles:
                 else:
                     self.grid_array[-1].append('_')
 
-    def set_player_position(self, x, y):
+    def set_player_position(self, x, y, player):
         if self.grid_array[x][y] == 'B':
             print("Great!! You found a Pokeball.")
             player = Player()
             player.pokemon_bag.append(1)
-            print(player.get_total_pokemon())
-        self.grid_array[x][y] = "X"
+        self.grid_array[x][y] = player
 
     def update_position(self, x, y):
         self.grid_array[x][y] = "_"
@@ -135,7 +134,7 @@ class GridTiles:
 
 
 def game_initialization():
-    first_player = input("Enter your ID: ")
+    first_player = (input("Enter your ID: "))
     player_one = Player(first_player)
     active_players = ActivePlayers()
     active_players.players.append(player_one)
@@ -163,7 +162,8 @@ def battle(player1, player2):
 
 
 def game_on(row_num, col_num, grid):
-    grid.set_player_position(row_num, col_num)
+    current_player = ActivePlayers()
+    grid.set_player_position(row_num, col_num, current_player.players[0].name)
     grid.battle_ground()
 
 
@@ -188,7 +188,7 @@ def navigate_grid():
     current_player = Player()
     while True:
         if current_player.get_total_pokemon() == 4:
-            print("Congratulation!! YOU WIN!!")
+            print("\nCONGRATULATIONS!! YOU WIN!!")
             break
         direction = ask_direction(road_blocked)
         road_blocked = False
