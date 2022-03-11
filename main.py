@@ -157,8 +157,8 @@ def pokemon_list():
 
 
 def battle(player1, player2):
-    print(f"Player one: {player1}")
-    print(f"Player two: {player2}")
+    print(f"Battle - Player {player1} Vs Player {player2}")
+    print("1. Fight\t2. Run\t3. Change Pokemon\t")
 
 
 def game_on(row_num, col_num, grid):
@@ -189,6 +189,7 @@ def navigate_grid():
     while True:
         if current_player.get_total_pokemon() == 4:
             print("\nCONGRATULATIONS!! YOU WIN!!")
+            print("YOU HAVE COLLECTED 4 POKEMONS.")
             break
         direction = ask_direction(road_blocked)
         road_blocked = False
@@ -230,20 +231,20 @@ def game_setup():
     your_pokemon_index = int(input("Enter your choice of pokemon number: ")) - 1
 
     my_current_pokemon = my_pokemon.get_pokemon(your_pokemon_index)
-    print(f"\nStatus of your pokemon")
+    print(f"\nSTATUS OF YOUR POKEMON")
     print('************************\n')
     my_pokemon.check_pokemon_status(your_pokemon_index)
 
     opponent_pokemon = Pokemon()
     opponent_pokemon_index = random.randint(0, opponent_pokemon.total_pokemon() - 1)
     opponent_current_pokemon = opponent_pokemon.get_pokemon(opponent_pokemon_index)
-    print(f"\nStatus of your opponant's pokemon")
-    print('**************************************\n')
+    print(f"\nSTATUS OF YOUR OPPONENT'S POKEMON")
+    print('***********************************\n')
     opponent_pokemon.check_pokemon_status(opponent_pokemon_index)
 
     act_players = ActivePlayers()
-    print("Display Players.")
     act_players.display_players()
+    battle(act_players.players[0].name, act_players.players[1].name)
 
 
 if __name__ == '__main__':
